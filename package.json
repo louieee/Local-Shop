@@ -1,0 +1,27 @@
+{
+  "name": "localshop",
+  "version": "1.0.0",
+  "description": "This is an application that aims to enable local sellers be online to enable buyers locate them.",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louieee/Local-Shop.git"
+  },
+  "keywords": [
+    "trading",
+    "business",
+    "software"
+  ],
+  "author": "Ohaegbu Louis Uzochukwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/louieee/Local-Shop/issues"
+  },
+  "homepage": "https://github.com/louieee/Local-Shop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
