@@ -4,7 +4,7 @@
   "description": "This is an application that aims to enable local sellers be online to enable buyers locate them.",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "start": "node -r dotenv/config server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/louieee/Local-Shop#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   }
 }
