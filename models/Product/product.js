@@ -1,9 +1,11 @@
-const { Model }= require('../../Library/model')
+const {Table} = require('../../Library/db_functions')
+const {Product} = require('../../Library/schema') 
+
 
 
 
     
-class Product extends Model{
+class Product_ extends Table{
     constructor(id, name, description, picture, price, category, seller_id){
         super()
         this.id = id
@@ -13,6 +15,7 @@ class Product extends Model{
         this.price = price
         this.category = category
         this.seller_id = seller_id
+        this.__str__ = 'Product'
+        this.item = Product
     }
 }
-
