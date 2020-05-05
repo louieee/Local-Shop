@@ -1,19 +1,16 @@
-const dotenv = require('dotenv')
-dotenv.config({path:'LocalShop/.env'})
 const express = require('express')
-const mysql = require('mysql')
+const { connection } = require('./Library/db')
+const { Product } = require('./models/Product/product')
+const { Transaction } = require('./models/Product/transaction')
+const { User } = require('./models/User/user')
+const { Buyer } = require('./models/User/buyer')
+const { Seller } = require('./models/User/seller')
 
-console.log(process.env.DATABASE)
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: 'root',
-    password: process.env.PASSWORD
 
-})
+
 
 const db_connect = connection.connect((error)=>{
-    if (error) console.log(error) 
+    if (error) console.log(error.message) 
     console.log('Connected to mysql server')
     const db_create_sql = `CREATE DATABASE ${process.env.DATABASE}`
     connection.query(db_create_sql, (error, result)=>{
@@ -21,6 +18,23 @@ const db_connect = connection.connect((error)=>{
         console.log(`${process.env.DATABASE} Database is created`)}
     })
 })
+const user  = new User()
+user.createTable()
+
+const seller  = new Seller()
+seller.createTable()
+
+const buyer  = new Buyer()
+buyer.createTable()
+
+const product  = new Product()
+product.createTable()
+
+const transaction = new Transaction()
+transaction.createTable()
+
+
+
 
 
 const app = express()

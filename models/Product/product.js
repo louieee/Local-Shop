@@ -15,7 +15,10 @@ class Product_ extends Table{
         this.price = price
         this.category = category
         this.seller_id = seller_id
-        this.__str__ = 'Product'
+        this.__str__ = 'products'
         this.item = Product
     }
 }
+
+
+exports.Product = Product_

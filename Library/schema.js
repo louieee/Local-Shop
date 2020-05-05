@@ -5,33 +5,33 @@ const Product = {
     picture :'BLOB',
     price : 'DECIMAL',
     category : 'TEXT',
-    seller_id : 'INT',
-    __str__ : 'Product'
+    seller_id : 'FK_C',
+   
 
 }
 
 const Transaction = {
     id : 'INT',
-    buyer_id :   'INT',
-    seller_id :  'INT',
     products : 'TEXT',
     datetime : 'DATETIME',
-    __str__ : 'Transaction'
+    buyer_id :   'FK_C',
+    seller_id :  'FK_C',
+   
     
 }
 
 const Buyer = {
     id : 'INT',
-    user_id :   'TINYTEXT'
+    user_id : 'FK_C'
     
 }
 
 const Seller = {
     id : 'INT',
-    user_id :   'TINYTEXT',
     shop_address :  'TEXT',
     banner : 'BLOB',
-    business_category : 'TEXT'
+    business_category : 'TEXT',
+    user_id :   'FK_C',
     
 }
 
@@ -44,7 +44,7 @@ const User = {
     city : 'TINYTEXT',
     state : 'TINYTEXT',
     country : 'TINYTEXT',
-    phone : 'JSON'
+    phone : 'MEDIUMTEXT'
 }
 
 exports.User = User

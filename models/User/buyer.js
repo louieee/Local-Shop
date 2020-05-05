@@ -7,8 +7,11 @@ class Buyer_ extends Table{
         super()
         this.id = id
         this.user_id = user_id
-        this.__str__ = 'Buyer'
+        this.__str__ = 'buyers'
         this.item = Buyer
 
     }
 }
+
+
+exports.Buyer = Buyer_

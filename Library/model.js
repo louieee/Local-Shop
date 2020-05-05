@@ -1,35 +1,17 @@
-const mysql = require('mysql');
-
-
-
-
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: 'root',
-    password: process.env.PASSWORD
-
-})
-
-
-
-
-
+const { connection } = require('.././Library/db')
 
 class Model {
+
     execute(sql){
-        connection.connect((error)=>{
-        if (error) console.log(error) 
-            console.log('Connected to mysql server')
             connection.query(sql, (error, result)=>{
                 if (error) {console.log(error.sqlMessage)}else{
-                console.log(`inserted`)
+                console.log('result:', result)
                 return result
             }
 
                 
         })
-    })
+    
         
     }
 
@@ -64,10 +46,19 @@ class Model {
     }
 
     create_query(data){
-        let query = `CREATE table ${this.__str__}(id INT PRIMARY KEY AUTO_INCREMENT `
+        let query = `CREATE TABLE IF NOT EXISTS ${this.__str__}(id INT PRIMARY KEY AUTO_INCREMENT, `
         Object.keys(data).forEach((item)=>{
             if (this.bool_check(data, item) & item !== 'id')
-            query = query.concat(`, ${item} ${data[item]} DEFAULT NULL`)
+                if (item.includes('_id')){
+                    query = query.concat(`, ${item} INT NOT NULL, 
+                    FOREIGN KEY (${item}) 
+                    REFERENCES ${item.split('_')[0]}s(id)
+                        ON UPDATE ${data[item].includes('_C') ? `CASCADE` : `SET NULL` }
+                        ON DELETE ${data[item].includes('_C') ? `CASCADE` : `SET NULL` }`)
+                }else{
+                    query = query.concat(`, ${item} ${data[item]} DEFAULT NULL`)
+                }
+            
         })
         return query.replace(',', '').concat(');')
     }

@@ -16,11 +16,10 @@ class User_ extends Table{
         this.state = ''
         this.country = ''
         this.phone = ''
-        this.__str__ = 'User'
+        this.__str__ = 'users'
         this.item = User
     }
 
 }
 
-const n = new User_(username='louisane')
-console.log(n.create_query(User))
+exports.User = User_
