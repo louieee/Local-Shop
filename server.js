@@ -1,13 +1,19 @@
+
+// Define your variables
+
 const express = require('express')
-const { connection } = require('./Library/db')
+const { connection, execute } = require('./Library/db')
 const { Product } = require('./models/Product/product')
 const { Transaction } = require('./models/Product/transaction')
 const { User } = require('./models/User/user')
 const { Buyer } = require('./models/User/buyer')
 const { Seller } = require('./models/User/seller')
+const { IndexRoutes } = require('./routes/Index/index')
+const { ProductRoutes } = require('./routes/Product/product')
+const {UserRoutes}  = require('./routes/User/user')
 
 
-
+// Connect to database
 
 const db_connect = connection.connect((error)=>{
     if (error) console.log(error.message) 
@@ -18,32 +24,36 @@ const db_connect = connection.connect((error)=>{
         console.log(`${process.env.DATABASE} Database is created`)}
     })
 })
+
+// create database tables 
+
 const user  = new User()
-user.createTable()
+execute(user.createTable(), (data)=>{})
 
 const seller  = new Seller()
-seller.createTable()
+execute(seller.createTable(), (data)=>{})
 
 const buyer  = new Buyer()
-buyer.createTable()
+execute(buyer.createTable(), (data)=>{})
 
 const product  = new Product()
-product.createTable()
+execute(product.createTable(), (data)=>{})
 
 const transaction = new Transaction()
-transaction.createTable()
+execute(transaction.createTable(), (data)=>{})
 
 
 
-
+// Define the routes
 
 const app = express()
 
+app.use('/', IndexRoutes)
+app.use('product/', ProductRoutes)
+app.use('/user', UserRoutes)
 
-app.get('/', (request, result)=>{ 
-    result.send('Welcome to Local Shop.')
-    db_connect
-})
 
+
+// run server
 
 app.listen(3000, () => console.log(`listening at http://localhost:3000`))

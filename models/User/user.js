@@ -3,14 +3,15 @@ const {User} = require('../../Library/schema')
 
 
 class User_ extends Table{
-    constructor(id, first_name, last_name, username, password){
+    constructor(){
         super()
-        this.id = id
-        this.first_name = first_name
-        this.last_name = last_name
-        this.username = username
-        this.password = password
-        this.profile_picture = null
+        this.id = ''
+        this.first_name = ''
+        this.last_name = ''
+        this.username = ''
+        this.password = ''
+        this.authenticated = ''
+        this.profile_picture = ''
         this.house_address = ''
         this.city = ''
         this.state = ''
@@ -21,5 +22,6 @@ class User_ extends Table{
     }
 
 }
+
 
 exports.User = User_

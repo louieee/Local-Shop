@@ -3,10 +3,10 @@ const { Buyer} = require('../../Library/schema')
 
 
 class Buyer_ extends Table{
-    constructor(id, user_id){
+    constructor(){
         super()
-        this.id = id
-        this.user_id = user_id
+        this.id = ''
+        this.user_id = ''
         this.__str__ = 'buyers'
         this.item = Buyer
 

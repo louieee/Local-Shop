@@ -1,29 +1,19 @@
 const { connection } = require('.././Library/db')
 
 class Model {
-
-    execute(sql){
-            connection.query(sql, (error, result)=>{
-                if (error) {console.log(error.sqlMessage)}else{
-                console.log('result:', result)
-                return result
-            }
-
-                
-        })
     
-        
-    }
+    
+    
 
     bool_check(data, item){
-        return typeof data[item] !== 'undefined' & item !== '__str__' & item !== 'item'
+        return (typeof data[item] !== 'undefined' & data[item] !== '') & item !== '__str__' & item !== 'item'  & item !== 'result'
     }
 
     update_query(data){
         let query = ``
         Object.keys(data).forEach((item)=>{
             if (this.bool_check(data, item))
-                query = query.concat(`,${item}=${data[item]}`)
+                query = query.concat(`,${item} = '${data[item]}'`)
         })
         return query.replace(',','')
     }
@@ -31,7 +21,7 @@ class Model {
         let query = ``
         Object.keys(data).forEach((item)=>{
             if (this.bool_check(data, item))
-                query = query.concat(`AND ${item}=${data[item]}`)
+                query = query.concat(`AND ${item} = '${data[item]}'`)
         })
         return query.slice(3)
     }
@@ -40,7 +30,7 @@ class Model {
         let query = ``
         Object.keys(data).forEach((item)=>{
             if (this.bool_check(data, item))
-                query = query.concat(`OR ${item}=${data[item]}`)
+                query = query.concat(`OR ${item} = '${data[item]}'`)
         })
         return query.slice(2)
     }
